@@ -98,3 +98,65 @@ mysql> select*from employee_payroll
 |  3 | Charlie | 3000000 | 2020-05-21 |
 +----+---------+---------+------------+
 2 rows in set (0.00 sec)
+-------------------------------------------------------------------------------------------------------
+
+#UC6: Add Gender to Employee Payroll Table and Update the Rows to reflect the correct Employee Gender
+
+mysql> ALTER TABLE employee_payroll ADD gender char(1) AFTER name;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> describe employee_payroll;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(150) | NO   |     | NULL    |                |
+| gender | char(1)      | YES  |     | NULL    |                |
+| salary | double       | NO   |     | NULL    |                |
+| start  | date         | NO   |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+5 rows in set (0.01 sec)
+
+mysql> update employee_payroll set gender ='F' where name='Terisa';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from employee_payroll;
++----+---------+--------+---------+------------+
+| id | name    | gender | salary  | start      |
++----+---------+--------+---------+------------+
+|  1 | Bill    | NULL   | 1000000 | 2018-01-03 |
+|  2 | Terisa  | F      | 2000000 | 2019-11-13 |
+|  3 | Charlie | NULL   | 3000000 | 2020-05-21 |
++----+---------+--------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update employee_payroll set gender ='M' where name='Bill' or name='Charlie';
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select*from employee_payroll;
++----+---------+--------+---------+------------+
+| id | name    | gender | salary  | start      |
++----+---------+--------+---------+------------+
+|  1 | Bill    | M      | 1000000 | 2018-01-03 |
+|  2 | Terisa  | F      | 2000000 | 2019-11-13 |
+|  3 | Charlie | M      | 3000000 | 2020-05-21 |
++----+---------+--------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update employee_payroll set salary=3000000.00 where name='Terisa';
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from employee_payroll;
++----+---------+--------+---------+------------+
+| id | name    | gender | salary  | start      |
++----+---------+--------+---------+------------+
+|  1 | Bill    | M      | 1000000 | 2018-01-03 |
+|  2 | Terisa  | F      | 3000000 | 2019-11-13 |
+|  3 | Charlie | M      | 3000000 | 2020-05-21 |
++----+---------+--------+---------+------------+
+3 rows in set (0.00 sec)
+------------------------------------------------------------------------------------------------
