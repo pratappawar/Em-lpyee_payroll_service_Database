@@ -53,3 +53,14 @@ mysql> describe employee_payroll;
 +--------+--------------+------+-----+---------+----------------+
 4 rows in set (0.01 sec)
 ------------------------------------------------------------------------------------------------
+
+#UC3: CURD Operation - Use payroll_service database
+
+mysql> insert into employee_payroll (name,salary,start) values
+    ->     ('Bill',1000000.00,'2018-01-03'),
+    ->     ('Terisa',2000000.00,'2019-11-13'),
+    ->     ('Charlie',3000000.00,'2020-05-21');
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+-------------------------------------------------------------------------------------------------
